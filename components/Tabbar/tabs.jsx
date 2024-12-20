@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CardforDashboard from '../DashboardComponent/Card';
-import ProductTable from '../Product/Producttable';
+import ProductPage from '@/app/Product/page';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -134,7 +134,7 @@ export default function VerticalTabs() {
           Orders Content
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <ProductTable/>
+          <ProductPage/>
         </TabPanel>
         <TabPanel value={value} index={3}>
           Customers Content

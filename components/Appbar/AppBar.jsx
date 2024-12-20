@@ -17,9 +17,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.15),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -44,8 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,  // corrected here
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -120,7 +119,7 @@ export default function PrimarySearchAppBar() {
       <MenuItem>
         <IconButton size="large" color="inherit">
           <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+            <NotificationsIcon sx={{ color: '#64748B' }} />  {/* Notification Icon color */}
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -133,7 +132,7 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <AccountCircle sx={{ color: 'black' }} />  {/* Account Circle color */}
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -142,20 +141,19 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: 'none' }}>  {/* Remove shadow */}
         <Toolbar>
-          {/* MUI Text */}
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'block' }, color: 'black' }}
           >
-            MUI
+            Product
           </Typography>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon sx={{ color: 'black' }} />  {/* Search Icon color */}
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
@@ -166,7 +164,7 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" color="inherit">
               <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+                <NotificationsIcon sx={{ color: '#64748B' }} />  {/* Notification Icon color */}
               </Badge>
             </IconButton>
             <IconButton
@@ -178,7 +176,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle sx={{ color: 'black' }} />  {/* Account Circle color */}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -190,7 +188,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <MoreIcon sx={{ color: 'black' }} />  {/* More Icon color */}
             </IconButton>
           </Box>
         </Toolbar>

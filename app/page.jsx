@@ -17,6 +17,7 @@ export default function HomePage() {
         <LoginForm onLoginSuccess={handleLoginSuccess} />
       ) : (
         <DashboardPage/>
+        
       )}
     </div>
   );

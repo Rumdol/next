@@ -10,22 +10,12 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 
 const columns = [
-  { id: 'productId', label: 'Product ID', minWidth: 170 },
-  { id: 'productName', label: 'Product Name', minWidth: 170 },
+  { id: 'brandId', label: 'Brand ID', minWidth: 170 },
   { id: 'brand', label: 'Brand', minWidth: 170 },
-  { id: 'gender', label: 'Gender', minWidth: 100 },
-  {
-    id: 'price',
-    label: 'Price',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => `$${value.toFixed(2)}`,
-  },
-  { id: 'status', label: 'Status', minWidth: 100 },
   { id: 'action', label: 'Action', minWidth: 100 },
 ];
 
-export default function ProductTable() {
+export default function BrandTable() {
   const [rows, setRows] = React.useState([]); // State to store fetched rows
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -33,33 +23,18 @@ export default function ProductTable() {
   // Fetch data from API when the component mounts
   React.useEffect(() => {
     const fetchData = async () => {
-      const baseUrl = "http://api.rumdul.store"; // Replace with your actual base URL
-
       try {
-        const response = await fetch(`${baseUrl}/vendor/product`);
+        const response = await fetch('http://api.rumdul.store/products'); // Replace with your actual API endpoint
         const data = await response.json();
-        console.log("Fetched data:", data);
-
-        // Assuming the API response has the structure like:
-        // { "data": [ { ...product data... }, { ...product data... } ] }
-        const transformedData = data.data.map((product) =>
-          createData(
-            product.id, // Assuming 'id' is the product ID
-            product.productName,
-            product.brand,
-            product.gender,
-            product.price,
-            product.status,
-            ''
-          )
+        const transformedData = data.map((product) =>
+          createData(product.productId, product.brand, '')
         );
-        setRows(transformedData); // Update rows state with transformed data
+        setRows(transformedData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
-
-    fetchData(); // Call the fetch function when component mounts
+    fetchData();
   }, []); // Empty dependency array ensures this runs only once when the component mounts
 
   const handleChangePage = (event, newPage) => {
@@ -139,9 +114,7 @@ export default function ProductTable() {
                       }
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                          {value}
                         </TableCell>
                       );
                     })}
@@ -165,6 +138,6 @@ export default function ProductTable() {
 }
 
 // Create data function
-function createData(productId, productName, brand, gender, price, status, action) {
-  return { productId, productName, brand, gender, price, status, action };
+function createData(brandId, brand, action) {
+  return { brandId, brand, action };
 }
